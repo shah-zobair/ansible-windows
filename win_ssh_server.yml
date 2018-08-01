@@ -1,0 +1,9 @@
+- name: Enable WIN Services
+  hosts: windows
+  gather_facts: False
+  become: true
+  roles:
+    - { role: "./roles/win_service_config" }
+  vars_files:
+    - './ssh_var.yml'
+

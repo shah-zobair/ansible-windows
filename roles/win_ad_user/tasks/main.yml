@@ -1,0 +1,21 @@
+---
+# tasks file for roles/win_ad_user
+
+- name: create AD groups
+  win_domain_group:
+    name: '{{ item.group_name }}'
+    scope: '{{ item.group_scope }}'
+    state: present
+  with_items: '{{ user_info }}'
+
+- name: create AD users
+  win_domain_user:
+    name: '{{ item.name }}'
+    firstname: '{{ item.firstname }}'
+    surname: '{{ item.surname }}'
+    password: '{{ item.password }}'
+    state: present
+    update_password: on_create
+    groups:
+      - '{{ item.group_name }}'
+  with_items: '{{ user_info }}'

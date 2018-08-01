@@ -1,0 +1,9 @@
+- name: Install AD
+  hosts: windows
+  gather_facts: true
+  become: true
+  roles:
+    - { role: "./roles/win_ad_install" }
+  vars_files:
+    - 'my_ad_vars.yml'
+
